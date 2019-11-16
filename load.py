@@ -6,7 +6,8 @@ def plugin_start(plugin_dir):
    """
    Load this plugin into EDMC
    """
-   print("EDSM System Checker as been loaded in the plugin folder {}").format(plugin_dir.encode("utf-8"))
+   print("EDSM System Checker as been loaded in the plugin folder {}").format(plugin_dir.encode("utf-8")
+   )return "EDSM System Checker"
 
 def plugin_stop():
     """
