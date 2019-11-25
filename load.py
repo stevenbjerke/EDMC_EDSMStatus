@@ -1,3 +1,4 @@
+from datetime import datetime
 from playsound import playsound
 from config import config
 import os, sys, urllib
@@ -22,9 +23,13 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
 
       if text == '[]' :
          print("We didn't find:" + entry['Name'])
-         playsound(os.path.join(os.path.dirname(os.path.realpath(__file__)), "NewSystem.mp3"))
+         LogUnregisteredSystem(entry['Name'])
+         playsound(os.path.join(os.path.dirname(os.path.realpath(__file__)), "Unregistered_System.mp3"))
       else :
          print("We found:" + entry['Name'])
-         playsound(os.path.join(os.path.dirname(os.path.realpath(__file__)), "Discovered.mp3"))
+         playsound(os.path.join(os.path.dirname(os.path.realpath(__file__)), "Registered_System.mp3"))
              
-
+def LogUnregisteredSystem(systemName):
+      fileName = os.path.join(os.path.dirname(os.path.realpath(__file__)), "UnregisteredSystems_" + datetime.now().strftime("%d%m%Y") + ".txt")
+      logEntry = datetime.now().strftime("%d-%m-%Y_%H:%M:%S | \"") + systemName + "\"\n"
+      with open(fileName, "a") as myfile: myfile.write(logEntry)
